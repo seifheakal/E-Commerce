@@ -55,8 +55,7 @@ com.fawry.ecommerce
 
 ```java
 // Create products
-Product cheese = new Product("Cheese", 100.0, 20, 
-    LocalDate.now().plusDays(3), true, 0.4);
+Product cheese = new Product("Cheese", 100.0, 20, LocalDate.now().plusDays(3), true, 0.4);
 Product tv = new Product("TV", 500.0, 10, null, true, 5.0);
 
 // Create customer
@@ -64,8 +63,8 @@ Customer customer = new Customer("cust-1", "John", 1000.0);
 
 // Add to cart
 Cart cart = new Cart();
-cart.add(cheese, 2);
-cart.add(tv, 1);
+cart.addItem(cheese, 2);
+cart.addItem(tv, 1);
 
 // Checkout
 CheckoutService checkout = new CheckoutService(...);
