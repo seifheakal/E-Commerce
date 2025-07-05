@@ -1,41 +1,56 @@
 # Fawry E-Commerce System
 
-Welcome to the Fawry E-Commerce System — a Java-based simulation of an e-commerce platform that handles inventory, shopping cart operations, shipping, and payment workflows.
-
-This project was built to demonstrate core concepts like object-oriented design, service layering, and real-world business logic.
+A robust Java implementation of an e-commerce platform with comprehensive inventory management, shopping cart operations, and checkout processing.
 
 ## Key Features
 
-- Product management (expirable/non-expirable, shippable/non-shippable)
-- Cart operations (add/remove/update items)
-- Checkout with receipt generation
-- Inventory validation
-- Shipping cost calculation
-- Payment processing
+- **Product Management**:
+  - Support for expirable (e.g., food) and non-expirable products (e.g., electronics)
+  - Shippable and non-shippable items with weight tracking
+  - Real-time stock validation
 
-## Business Rules & Assumptions
+- **Cart Operations**:
+  - Add/remove/update items
+  - Quantity validation
+  - Automatic stock reservation
 
-### Delivery and Expiry
-- Delivery takes **2 days** from order date
-- Expirable products must be valid **through the delivery date**
-  - Example: If a product expires tomorrow, it won’t be eligible for checkout since it won’t survive until delivery.
-    
-### Shipping Costs
-- **Base cost**: 10.0 L.E
-- **Per kilogram**: 5.0 L.E
-- **Free shipping**: Orders ≥ 1000 L.E get free shipping
-- **Maximum shipping weight**: 50 kg (system rejects heavier orders)
+- **Checkout System**:
+  - Multi-step validation (stock, expiry, balance)
+  - Detailed receipt generation
+  - Shipping cost calculation
+  - Payment processing
 
-### Transactions
-- **Maximum transaction amount**: 100,000 L.E
-- **Refunds**: Treated as balance recharge (no dedicated refund function)
+- **Error Handling**:
+  - Comprehensive validation for all operations
+  - Clear error messages for business rule violations
 
-### Products
-- All products have weight (even non-shippable ones)
+## Business Rules & Specifications
+
+### Delivery and Product Expiry
+- **Delivery Period**: 2 days from order date
+- **Expiry Validation**: Products must remain valid through delivery date
+  - Example: Product expiring tomorrow cannot be delivered (arrives in 2 days)
+
+### Shipping Calculations
+| Component | Value |
+|-----------|-------|
+| Base Cost | 10.0 L.E |
+| Per Kilogram | 5.0 L.E |
+| Free Shipping Threshold | ≥ 1000 L.E order value |
+| Maximum Weight | 50 kg |
+
+### Financial Rules
+- **Transaction Limit**: 100,000 L.E maximum
+- **Balance Management**:
+  - Negative balances prohibited
+  - Refunds processed as balance recharge
+
+### Product Requirements
+- All products require weight specification
   - Helps with warehouse inventory management
 - Weight display:
-  - <1 kg: shown in grams (e.g., 400g)
-  - ≥1 kg: shown in kilograms (e.g., 1.20kg)
+  - <1 kg: grams (e.g., 400g)
+  - ≥1 kg: kilograms (e.g., 1.20kg)
 
 ## Class Structure
 com.fawry.ecommerce
@@ -59,7 +74,7 @@ Product cheese = new Product("Cheese", 100.0, 20, LocalDate.now().plusDays(3), t
 Product tv = new Product("TV", 500.0, 10, null, true, 5.0);
 
 // Create customer
-Customer customer = new Customer("cust-1", "John", 1000.0);
+Customer customer = new Customer("cust-1", "Seif", 1000.0);
 
 // Add to cart
 Cart cart = new Cart();
@@ -71,7 +86,7 @@ CheckoutService checkout = new CheckoutService(...);
 checkout.checkout(customer, cart);
 
 === Fawry E-Commerce Receipt ===
-Customer: John
+Customer: Seif
 -------------------------------
  2x Cheese               L.E200.00 (400g)
  1x TV                   L.E500.00 (5.00kg)
