@@ -12,7 +12,6 @@ A robust Java implementation of an e-commerce platform with comprehensive invent
 - **Cart Operations**:
   - Add/remove/update items
   - Quantity validation
-  - Automatic stock reservation
 
 - **Checkout System**:
   - Multi-step validation (stock, expiry, balance)
