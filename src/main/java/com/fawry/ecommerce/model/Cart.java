@@ -7,7 +7,7 @@ import java.util.Map;
 public class Cart {
     private final Map<Product, Integer> items = new LinkedHashMap<>(); // Product -> Quantity
 
-    public void add(Product product, int quantity) {
+    public void addItem(Product product, int quantity) {
         validateProductNotNull(product);
         validateQuantityPositive(quantity);
         items.merge(product, quantity, Integer::sum);
